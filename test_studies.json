@@ -1,0 +1,33 @@
+[
+	{
+		"Irb_number": "1999H145",
+		"project_title": "D9902: A COG Soft Tissue Sarcoma Diagnosis, Biology and Banking Protocol",
+		"study_description": "Soft Tissue. Contact: Ashley Bayne Phone: 352-265-0680 Ext: 48969 ",
+		"UFID": "25637200",
+		"keyword1": "Sarcoma Diagnosis",
+		"keyword2": "Soft Tissue",
+		"keyword3": "Banking Protocol",
+		"keyword4": ""
+	},
+		{
+		"Irb_number": "13",
+		"study_description": "This study investigates the relationship between childhood obesity and the development of the cerebellum.",
+		"UFID": "02006060",
+		"UFID": "84808900",
+		"keyword1": "cerebellum",
+		"keyword2": "children",
+		"keyword3": "obesity",
+		"keyword4": "observational study"
+	},
+	{
+		"Irb_number": "1999H419",
+		"project_title": "Nonsurgical Septal Reduction for Hypertrophic Obstructive Cardiomyopathy (HOCM)",
+		"study_description": "This study is a registry which is being done to evaluate the safety and effectiveness of the alcohol ablation procedure.  We will collect information following your clinically indicated alcohol ablation procedure.",
+		"UFID": "02006060",
+		"keyword1": "septal reduction",
+		"keyword2": "hypertrophic obstructive cardiomyopathy",
+		"keyword3": "hocm",
+		"keyword4": "alcohol septal ablation",
+		"keyword5": "heart"
+	}
+]
