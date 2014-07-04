@@ -200,12 +200,7 @@ def make_authorship_rdf(pub_uri, author_uri, rank, corresponding=False):
     Given data values, create the RDF for an authorship
     """
     ardf = ""
-    authorship_uri = get_vivo_uri()
-    add = assert_resource_property(authorship_uri, "rdf:type", 
-        untag_predicate("owl:Thing"))
-    ardf = ardf + add
-    add = assert_resource_property(authorship_uri, "rdf:type",
-        untag_predicate("vivo:Authorship"))
+    [add, authorship_uri] = add_entity("vivo:Authorship")
     ardf = ardf + add
     add = assert_resource_property(authorship_uri,
         "vivo:linkedAuthor", author_uri)
@@ -221,19 +216,21 @@ def make_authorship_rdf(pub_uri, author_uri, rank, corresponding=False):
     ardf = ardf + add
     return [ardf, authorship_uri]
 
-def add_study():
+def add_study(uri=None, harvested=True):
     """
     create a study entity
     """
-    return add_entity('ero:ERO_0000015')
+    return add_entity('ero:ERO_0000015', uri=uri, harvested=harvested)
 
-def add_entity(tag, harvested=True):
+def add_entity(tag, uri=None, harvested=True):
     """
     given a tag, create an entity of that type. If harvested is True, add
-    date harvested and harvested by assertions
+    date harvested and harvested by assertions. If uri is None, assign to a
+    new URI, otherwise use the provided uri
     """
     ardf = ""
-    uri = get_vivo_uri()
+    if uri is None:
+        uri = get_vivo_uri()
     add = assert_resource_property(uri, "rdf:type",
                                    untag_predicate('owl:Thing'))
     ardf = ardf + add
