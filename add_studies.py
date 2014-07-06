@@ -99,7 +99,7 @@ def update_study(vivo_study, source_study):
     """
     given a vivo study and a source data study, create a key table to provide
     attributes to be updated and instructions on how to update them.  Given the
-    objects and instructions to update_entity to do the work
+    objects and instructions to update_entity to do the work.
     """
     key_table = {
         'concept_uris': {'predicate': 'vivo:hasSubjectArea',
@@ -126,7 +126,17 @@ def update_study(vivo_study, source_study):
 def update_entity(vivo_entity, source_entity, key_table):
     """
     Given a VIVO entity and a source entity, go through the elements
-    in the key_table and update VIVO as needed
+    in the key_table and update VIVO as needed.
+
+    Four actions are supported:
+
+    literal -- single valued literal.  Such as an entity label
+    resource -- single valued reference to another object.  Such as the
+        publisher of a journal
+    literal_list -- a list of literal values.  Such as phone numbers for
+        a person
+    resource_list -- a list of references to other objects.  Such as a
+        a list of references to concepts for a paper
     """
     print "VIVO Entity", vivo_entity
     print "Source Entity", source_entity
