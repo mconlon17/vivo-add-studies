@@ -24,93 +24,88 @@
     xmlns:core    = "http://vivoweb.org/ontology/core#"
     xmlns:vivo    = "http://vivoweb.org/ontology/core#">
 
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8682915805">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n6813720180">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Sarcoma Diagnosis</rdfs:label>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n9017487293">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n5826467769">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Soft Tissue</rdfs:label>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8776848191">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n759588798">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Banking Protocol</rdfs:label>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n2187356068">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <rdfs:label>Children</rdfs:label>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n5529206996">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n181728201">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Observational Study</rdfs:label>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n82938728">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n5518744767">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Septal Reduction</rdfs:label>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n6600327108">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n6571437452">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Hypertrophic Obstructive Cardiomyopathy</rdfs:label>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n437658650">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n7510680700">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Hocm</rdfs:label>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n4753539592">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n9482620694">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:label>Alcohol Septal Ablation</rdfs:label>
-    </rdf:Description>    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
+    </rdf:Description>    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
         <rdf:type rdf:resource="http://purl.obolibrary.org/obo/ERO_0000015"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
-        <ufVivo:dateHarvested>2014-07-04 14:19:02.975000</ufVivo:dateHarvested>
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
+        <ufVivo:dateHarvested>2014-07-07 22:24:43.822000</ufVivo:dateHarvested>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
         <ufVivo:harvestedBy>Python Studies 0.1</ufVivo:harvestedBy>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
         <ufVivo:harvestedBy>Python Studies 0.1</ufVivo:harvestedBy>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
-        <ufVivo:dateHarvested>2014-07-04 14:19:01.600000</ufVivo:dateHarvested>
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
+        <ufVivo:dateHarvested>2014-07-07 22:24:43.089000</ufVivo:dateHarvested>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
         <ufVivo:irbnumber>13</ufVivo:irbnumber>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
         <vivo:hasSubjectArea rdf:resource="http://vivo.ufl.edu/individual/n4179496409"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
-        <vivo:hasSubjectArea rdf:resource="http://vivo.ufl.edu/individual/n2187356068"/>
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
+        <vivo:hasSubjectArea rdf:resource="http://vivo.ufl.edu/individual/n1158933564"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
         <vivo:hasSubjectArea rdf:resource="http://vivo.ufl.edu/individual/n43458"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n8247190676">
-        <vivo:hasSubjectArea rdf:resource="http://vivo.ufl.edu/individual/n5529206996"/>
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n1563473513">
+        <vivo:hasSubjectArea rdf:resource="http://vivo.ufl.edu/individual/n181728201"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n9280184020">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n5570089970">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n9280184020">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n5570089970">
         <rdf:type rdf:resource="http://purl.obolibrary.org/obo/ERO_0000015"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n9280184020">
-        <ufVivo:dateHarvested>2014-07-04 14:19:04.069000</ufVivo:dateHarvested>
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n5570089970">
+        <ufVivo:dateHarvested>2014-07-07 22:24:44.680000</ufVivo:dateHarvested>
     </rdf:Description>
-    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n9280184020">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n5570089970">
         <ufVivo:harvestedBy>Python Studies 0.1</ufVivo:harvestedBy>
     </rdf:Description>
 
