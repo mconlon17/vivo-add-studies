@@ -8,6 +8,12 @@
     Version 0.1 MC 2014-06-11
     --  file name from command line.  Convert unicode to XML char on output.
         All attributes of a study are optional except for IRBnumber.
+    Version 0.2 MC 2014-07-12
+    --  Nearly complete first version
+
+    To Do
+    --  Handle authorships
+    --  Debug resource list merging
 """
 
 __author__ = "Michael Conlon"
@@ -26,6 +32,7 @@ from vivotools import update_resource_property
 from vivotools import rdf_header
 from vivotools import rdf_footer
 from vivotools import find_vivo_uri
+from vivotools import get_vivo_value
 from vivotools import untag_predicate
 from vivotools import get_triples
 from vivotools import get_authorship
@@ -78,7 +85,7 @@ def get_study(study_uri):
         if p == \
            "http://vivoweb.org/ontology/core#informationResourceInAuthorship":
             study['authorship_uris'].append(o)
-            authorship = get_authorship(authorship_uri)
+            authorship = get_authorship(o)
             if 'author_uri' in authorship:
 
                 #   Add key value which is rank.  Then string_from_document
@@ -138,8 +145,9 @@ def update_entity(vivo_entity, source_entity, key_table):
     resource_list -- a list of references to other objects.  Such as a
         a list of references to concepts for a paper
     """
-    print "VIVO Entity", vivo_entity
-    print "Source Entity", source_entity
+    print "VIVO Entity", json.dumps(vivo_entity, indent=4)
+    print "Source Entity", json.dumps(source_entity, indent=4)
+    print "Key Table", key_table
     entity_uri = vivo_entity['uri']
     ardf = ""
     srdf = ""
@@ -228,7 +236,8 @@ def make_authorship_rdf(pub_uri, author_uri, rank, corresponding=False):
 
 def add_study(uri=None, harvested=True):
     """
-    create a study entity
+    create a study entity.  Returns the RDF to create the new entity
+    and the URI of the new entity
     """
     return add_entity('ero:ERO_0000015', uri=uri, harvested=harvested)
 
@@ -268,19 +277,20 @@ def prepare_studies(raw_studies):
         study['irb_number'] = study['Irb_number']
         if 'project_title' in study:
             study['title'] = study['project_title']
-        if 'description' in study:
+        if 'study_description' in study:
             study['description'] = study['study_description']
         study['concept_uris'] = []
         study['date_harvested'] = str(datetime.now())
         study['harvested_by'] = __harvest_text__
         if 'UFID' in study:
-            inv_uri = find_vivo_uri('ufVivo:ufid', study['UFID'])
+            ufid = study['UFID']
+            inv_uri = find_vivo_uri('ufVivo:ufid', ufid)
             if inv_uri is not None:
-                print >>log_file, "Found investigator", study['UFID'], "at", \
+                print >>log_file, "Found investigator", ufid, "at", \
                       inv_uri
                 study['inv_uri'] = inv_uri
             else:
-                print >>log_file, "Not found", study['UFID']
+                print >>log_file, "Not found", ufid
         for key in ['keyword1', 'keyword2', 'keyword3', 'keyword4', 'keyword5']:
             if key in study:
                 concept_name = study[key].title()
@@ -335,19 +345,21 @@ print >>log_file, datetime.now(), "Study Data has", len(studies), "studies"
 # Main loop
 
 for study in studies:
-    print study
     study_uri = find_vivo_uri('ufVivo:irbnumber', study['Irb_number'])
     if study_uri is not None:
         print >>log_file, "Updating Study at",study_uri
+        vivo_study = get_study(study_uri)
         [add, sub] = update_study(vivo_study, study)
         ardf = ardf + add
         srdf = srdf + sub
     else:
-        print >>log_file, "Adding Study"
-        [add, study_uri] = add_study()
+        print >>log_file, "Adding Study at", study_uri
+        [add, study_uri] = add_study(harvested=False)
         vivo_study = {'uri': study_uri}
         ardf = ardf + add
         [add, sub] = update_study(vivo_study, study)
+        ardf = ardf + add
+        srdf = srdf + sub
 
 adrf = ardf + rdf_footer()
 srdf = srdf + rdf_footer()

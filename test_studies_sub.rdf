@@ -23,6 +23,12 @@
     xmlns:vitro2  = "http://vitro.mannlib.cornell.edu/ns/vitro/public#"
     xmlns:core    = "http://vivoweb.org/ontology/core#"
     xmlns:vivo    = "http://vivoweb.org/ontology/core#">
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n42801">
+        <vivo:description>This study investigates the relationship between childhood obesity and the development of the cerebellum</vivo:description>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivo.ufl.edu/individual/n42801">
+        <rdfs:label>Early childhood obesity is associated with compromised cerebellar development.</rdfs:label>
+    </rdf:Description>
 
 </rdf:RDF>
 
