@@ -13,7 +13,6 @@
 
     To Do
     --  Handle authorships
-    --  Debug resource list merging
 """
 
 __author__ = "Michael Conlon"
@@ -180,11 +179,13 @@ def update_entity(vivo_entity, source_entity, key_table):
             ardf = ardf + add
             srdf = srdf + sub
         elif action == 'literal_list':
-            vals = vivo_entity.get(key,[])+source_entity.get(key,[])
+            vivo_list = vivo_entity.get(key,[])
+            source_list = source_entity.get(key,[])
+            vals = vivo_list + source_list
             for val in vals:
-                if val in vivo_entity and val in source_entity:
+                if val in vivo_list and val in source_list:
                     pass
-                elif val in vivo_entity and val not in source_entity:
+                elif val in vivo_list and val not in source_list:
                     [add, sub] = update_data_property(entity_uri,
                         key_table[key]['predicate'], val, None)
                     ardf = ardf + add
@@ -195,11 +196,13 @@ def update_entity(vivo_entity, source_entity, key_table):
                     ardf = ardf + add
                     srdf = srdf + sub
         elif action == 'resource_list':
-            vals = vivo_entity.get(key,[])+source_entity.get(key,[])
+            vivo_list = vivo_entity.get(key,[])
+            source_list = source_entity.get(key,[])
+            vals = vivo_list + source_list
             for val in vals:
-                if val in vivo_entity and val in source_entity:
+                if val in vivo_list and val in source_list:
                     pass
-                elif val in vivo_entity and val not in source_entity:
+                elif val in vivo_list and val not in source_list:
                     [add, sub] = update_resource_property(entity_uri,
                         key_table[key]['predicate'], val, None)
                     ardf = ardf + add
@@ -282,15 +285,20 @@ def prepare_studies(raw_studies):
         study['concept_uris'] = []
         study['date_harvested'] = str(datetime.now())
         study['harvested_by'] = __harvest_text__
+        study['authorship_uris'] = []
         if 'UFID' in study:
             ufid = study['UFID']
             inv_uri = find_vivo_uri('ufVivo:ufid', ufid)
             if inv_uri is not None:
                 print >>log_file, "Found investigator", ufid, "at", \
                       inv_uri
+                [add, authorship_uri] = make_authorship_rdf(study_uri, inv_uri,
+                                                            "1",True)
+                study['authorship_uris'] = [authorship_uri]
+                ardf = ardf + add
                 study['inv_uri'] = inv_uri
             else:
-                print >>log_file, "Not found", ufid
+                print >>exc_file, "Investigator not found", ufid
         for key in ['keyword1', 'keyword2', 'keyword3', 'keyword4', 'keyword5']:
             if key in study:
                 concept_name = study[key].title()
