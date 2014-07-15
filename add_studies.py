@@ -18,7 +18,7 @@
 __author__ = "Michael Conlon"
 __copyright__ = "Copyright 2014, University of Florida"
 __license__ = "BSD 3-Clause license"
-__version__ = "0.1"
+__version__ = "0.2"
 
 __harvest_text__ = "Python Studies " + __version__
 
@@ -37,6 +37,7 @@ from vivotools import get_triples
 from vivotools import get_authorship
 from vivotools import make_concept_dictionary
 from vivotools import make_concept_rdf
+from vivotools import remove_uri
 import vivotools as vt
 
 from datetime import datetime
@@ -110,8 +111,6 @@ def update_study(vivo_study, source_study):
     key_table = {
         'concept_uris': {'predicate': 'vivo:hasSubjectArea',
                         'action': 'resource_list'},
-        'authorship_uris': {'predicate': 'vivo:informationResourceInAuthorship',
-                        'action': 'resource_list'},
         'title':{'predicate': 'rdfs:label',
                         'action': 'literal'},
         'irb_number':{'predicate': 'ufVivo:irbnumber',
@@ -124,10 +123,57 @@ def update_study(vivo_study, source_study):
                         'action': 'literal'}
         }
 
-    # authorships for source study
-
+    ardf = ""
+    srdf = ""
+    [add, sub] = update_entity(vivo_study, source_study, key_table)
+    ardf = ardf + add
+    srdf = srdf + sub
     
-    return update_entity(vivo_study, source_study, key_table)
+    #   Finish up with the investigators, adding and removing authorships
+    #   as necesary
+
+    if 'author_uris' in vivo_study:
+        vivo_list = vivo_study['author_uris']
+    else:
+        vivo_list = []
+    if 'author_uris' in source_study:
+        source_list = source_study['author_uris']
+    else:
+        souce_list = []
+    author_uri_list = vivo_list + source_list
+    for author_uri in author_uri_list:
+        if author_uri in vivo_list and author_uri in source_list:
+            pass
+        elif author_uri in vivo_list:
+            
+            #   Find the authorship.  Remove the authorship and the assertion
+            #   that the study has the authorship
+
+            k = 0
+            authorship_uri = None
+            for auri in vivo_study['author_uris']:
+                if auri == author_uri:
+                    authorship_uri = vivo_study['authorship_uris'][k]
+                    continue
+                k = k + 1
+            sub = remove_uri(authorship_uri)
+            srdf = srdf + sub
+            [add, sub] = update_resource_property(vivo_study['uri'],\
+                "vivo:informationResourceInAuthorship", authorship_uri, None)
+            ardf = ardf + add
+            srdf = srdf + sub
+        else:
+            
+            #   add new authorship and assert the study has the authorship
+            
+            [add, authorship_uri] = add_authorship(vivo_study['uri'],\
+                                                   author_uri)
+            ardf = ardf + add
+            add = assert_resource_property(study_uri, \
+                "vivo:informationResourceInAuthorship", authorship_uri)
+            ardf = ardf + add
+
+    return [ardf, srdf]
 
 def update_entity(vivo_entity, source_entity, key_table):
     """
@@ -216,7 +262,7 @@ def update_entity(vivo_entity, source_entity, key_table):
             raise ActionError(action)
     return [ardf, srdf]
 
-def make_authorship_rdf(pub_uri, author_uri, rank, corresponding=False):
+def add_authorship(pub_uri, author_uri, rank=None, corresponding=None):
     """
     Given data values, create the RDF for an authorship
     """
@@ -229,12 +275,14 @@ def make_authorship_rdf(pub_uri, author_uri, rank, corresponding=False):
     add = assert_resource_property(authorship_uri,
         "vivo:linkedInformationResource", pub_uri)
     ardf = ardf + add
-    add = assert_data_property(authorship_uri,
-        "vivo:authorRank", rank)
-    ardf = ardf + add
-    add = assert_data_property(authorship_uri,
-        "vivo:isCorrespondingAuthor", str(corresponding).lower())
-    ardf = ardf + add
+    if rank is not None:
+        add = assert_data_property(authorship_uri,
+            "vivo:authorRank", rank)
+        ardf = ardf + add
+    if corresponding is not None:
+        add = assert_data_property(authorship_uri,
+            "vivo:isCorrespondingAuthor", str(corresponding).lower())
+        ardf = ardf + add
     return [ardf, authorship_uri]
 
 def add_study(uri=None, harvested=True):
@@ -285,20 +333,14 @@ def prepare_studies(raw_studies):
         study['concept_uris'] = []
         study['date_harvested'] = str(datetime.now())
         study['harvested_by'] = __harvest_text__
-        study['authorship_uris'] = []
+        study['author_uris'] = []
         if 'UFID' in study:
             ufid = study['UFID']
-            inv_uri = find_vivo_uri('ufVivo:ufid', ufid)
-            if inv_uri is not None:
-                print >>log_file, "Found investigator", ufid, "at", \
-                      inv_uri
-                [add, authorship_uri] = make_authorship_rdf(study_uri, inv_uri,
-                                                            "1",True)
-                study['authorship_uris'] = [authorship_uri]
-                ardf = ardf + add
-                study['inv_uri'] = inv_uri
+            author_uri = find_vivo_uri('ufVivo:ufid', ufid)
+            if author_uri is not None:
+                study['author_uris'] = [author_uri]
             else:
-                print >>exc_file, "Investigator not found", ufid
+                print >>exc_file, "Author UFID ", ufid, "not found"
         for key in ['keyword1', 'keyword2', 'keyword3', 'keyword4', 'keyword5']:
             if key in study:
                 concept_name = study[key].title()
